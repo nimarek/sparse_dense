@@ -1,0 +1,15 @@
+####################
+# nibetaseries 0.6 #
+####################
+
+initial_dir				= /home/data/sparse_dense/BIDS/sparseDense/code/nibs_submit/
+executable				= sub-02_nibs.sh
+
+Request_Memory = 16000
+Request_cpus = 4
+
+output					= /home/data/sparse_dense/BIDS/sparseDense/code/nibs_logs/$(CLUSTER).$(PROCESS).out
+error					= /home/data/sparse_dense/BIDS/sparseDense/code/nibs_logs/$(CLUSTER).$(PROCESS).err
+log						= /home/data/sparse_dense/BIDS/sparseDense/code/nibs_logs/$(CLUSTER).$(PROCESS).log
+
+queue 1
