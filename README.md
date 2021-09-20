@@ -1,8 +1,8 @@
 # MVPA analysis of the sparse-dense Experiment.
 
-This repository contains scripts for the analysis of behavioral part of the fMRI data using R[[1]](#1), 
-scripts for GLM based Beta-Series least-squares-separate (LSS) estimation[[2]](#2) and scripts for a whole-brain 
-searchlight[[3]](#3) analysis using a support-vector-classifier implemented in Nilearn[[4]](#4).
+This repository contains scripts for the analysis of behavioral part of the fMRI data using R [[1]](#1), 
+scripts for GLM based Beta-Series least-squares-separate (LSS) estimation [[2]](#2) and scripts for a whole-brain 
+searchlight [[3]](#3) analysis using a support-vector-classifier implemented in Nilearn [[4]](#4).
 
 GLM and MVPA analysis use HTCondor .submit files for parallel computing on a HPC.
 
