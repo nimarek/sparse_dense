@@ -4,7 +4,9 @@ This repository contains scripts for the analysis of behavioral part of the fMRI
 scripts for GLM based Beta-Series least-squares-separate (LSS) estimation [[2]](#2) and scripts for a whole-brain 
 searchlight [[3]](#3) analysis using a support-vector-classifier implemented in Nilearn [[4]](#4).
 
-GLM and MVPA analysis use HTCondor .submit files for parallel computing on a HPC.
+## Important Notes
+- GLM and MVPA analysis use HTCondor .submit files for parallel computing on a HPC
+- A fold-wise permutation scheme needs to be implemented [[5]](#5) or we use pyMVPA [[6]](#6)
 
 ## References
 <a id="1">[1]</a> 
@@ -26,3 +28,13 @@ Proceedings of the National Academy of Sciences, 103(10), 3863-3868.
 Abraham, A., Pedregosa, F., Eickenberg, M., Gervais, P., Mueller, A., Kossaifi, J., ... & Varoquaux, G. (2014). 
 Machine learning for neuroimaging with scikit-learn. 
 Frontiers in neuroinformatics, 8, 14.
+
+<a id="5">[5]</a> 
+Etzel, J. A., & Braver, T. S. (2013). 
+MVPA permutation schemes: Permutation testing in the land of cross-validation. 
+In 2013 International Workshop on Pattern Recognition in Neuroimaging (pp. 140-143). IEEE.
+
+<a id="6">[6]</a> 
+Hanke, M., Halchenko, Y. O., Sederberg, P. B., Hanson, S. J., Haxby, J. V., & Pollmann, S. (2009). 
+PyMVPA: A python toolbox for multivariate pattern analysis of fMRI data. 
+Neuroinformatics, 7(1), 37-53.
