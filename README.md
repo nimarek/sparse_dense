@@ -5,8 +5,9 @@ scripts for GLM based Beta-Series least-squares-separate (LSS) estimation [[2]](
 searchlight [[3]](#3) analysis using a support-vector-classifier implemented in Nilearn [[4]](#4).
 
 ## Important Notes
+- The goal is to keep the analysis dynamic enough so that it can be adapted for future projects
 - GLM and MVPA analysis use HTCondor .submit files for parallel computing on a HPC
-- A fold-wise permutation scheme needs to be implemented [[5]](#5) or we use pyMVPA [[6]](#6)
+- A fold-wise permutation scheme needs to be implemented [[5]](#5) or we use pyMVPA [[6]](#6) instead
 
 ## References
 <a id="1">[1]</a> 
