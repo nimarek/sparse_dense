@@ -1,9 +1,10 @@
 #!/bin/bash
-echo "activating env"
-. /home/data/software/experimental/ipsy-env/activate
 
 echo "checking python version prior to spack load"
 python --version
+
+echo "activating env"
+. /home/data/software/experimental/ipsy-env/activate
 
 echo "python version after spack load python"
 python --version
