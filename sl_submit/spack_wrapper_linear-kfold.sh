@@ -1,12 +1,12 @@
 #!/bin/bash
 echo "activating env"
-. /home/data/software/current/share/spack/setup-env.sh
+. /home/data/software/experimental/ipsy-env/activate
 
 echo "checking python version prior to spack load"
 python --version
 
 echo "spack load python being called"
-spack load python
+spack load python@3.8.12
 spack load py-scikit-learn
 spack load py-nilearn
 spack load py-numpy
