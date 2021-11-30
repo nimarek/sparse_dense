@@ -3,9 +3,8 @@ import sys
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import KFold, StratifiedKFold, GridSearchCV
-from sklearn.svm import SVC, LinearSVC
-from sklearn.multiclass import OneVsRestClassifier
+from sklearn.model_selection import KFold, StratifiedKFold, PredefinedSplit
+from sklearn.svm import LinearSVC
 
 from nibabel.funcs import concat_images
 from nibabel import save
@@ -18,7 +17,7 @@ betas_dir = '/home/data/sparse_dense/BIDS/sparseDense/derivatives/nibetaseries'
 out_dir = '/home/data/sparse_dense/BIDS/sparseDense/derivatives/mvpa'
 
 sub = str(sys.argv[1])
-sl_radii = [4]
+sl_radii = [12]
 dim = 'sparse-dense'
 
 def prepare_data(input_func_dir, 
@@ -41,7 +40,6 @@ def prepare_data(input_func_dir,
                 print('>> Run is empty <<')
                 continue
             
-            print(func_runs)
             for betas_path in func_runs:
                 img_tmp = load_img(betas_path)
                 beta_files.append(img_tmp)
@@ -66,44 +64,42 @@ if dim == 'sparse-dense':
     print(f'Using scoring metric:', scoring)
     cv = KFold(n_splits=4)
 
-    param_grid = [
-    {
-        'classify__C': np.logspace(-6, 2, num=5),
-    },
-    ]
+    # Create pipeline: SVM
+    svm = Pipeline([
+            ('scale', StandardScaler()),
+            ('svc', LinearSVC())
+    ])
+elif dim == 'mixed-fixed':
+    dimension_list=['Mixed', 'Fixed']
+    scoring = 'accuracy'
+    print(f'Using scoring metric:', scoring)
+
+    # setting up a unique train/test split for this condition
+    if int(sub % 2) == 0:
+        # mixed first data
+        test_fold = []
+    else:
+        # fixed first data
+        test_fold = []
+    cv = PredefinedSplit
 
     # Create pipeline: SVM
     svm = Pipeline([
             ('scale', StandardScaler()),
             ('svc', LinearSVC())
     ])
-
-    # Create a gridsearch pipeline
-    svm_grid = GridSearchCV(svm, param_grid,
-                            return_train_score=True, refit=True, n_jobs=-1)
-
-elif dim == 'mixed-fixed':
-    dimension_list=['Mixed', 'Fixed']
-    scoring = 'accuracy'
-    print(f'Using scoring metric:', scoring)
-    cv = KFold(n_splits=4, shuffle=True)
-
-    # Create pipeline: SVM
-    svm = Pipeline([
-            ('scale', StandardScaler()),
-            ('svc', SVC(kernel='rbf', gamma='auto', class_weight=None, max_iter=-1))
-    ])
-elif dim == 'trial-sequence':
-    dimension_list=['sF', 'sD', 'dD']
+elif dim == 'trial-sequence-sF-dD':
+    #To-Do: Doesn't work
+    dimension_list=['FixedsF', 'FixeddD']
     # Use appro. scoring and cross-validation method
-    scoring = 'f1'
+    scoring = 'accuracy'
     print(f'Using scoring metric:', scoring)
     cv = StratifiedKFold(n_splits=4)
 
     # Create pipeline: SVM for multi-class problems
     svm = Pipeline([
             ('scale', StandardScaler()),
-            ('svc', OneVsRestClassifier(SVC(kernel='rbf', gamma='auto', class_weight='balanced', max_iter=-1)))
+            ('svc', LinearSVC())
         ])
 else:
     raise ValueError('No cross-validation selected!')
