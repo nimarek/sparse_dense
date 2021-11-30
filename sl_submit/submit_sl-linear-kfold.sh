@@ -6,11 +6,13 @@ logs_dir=/home/data/sparse_dense/BIDS/sparseDense/code/sl_logs/
 # create the logs dir if it doesn't exist
 [ ! -d "$logs_dir" ] && mkdir -p "$logs_dir"
 
+# exclude bad nodes from analysis
+
 printf "# The environment
 universe       = vanilla
 getenv         = True
 request_cpus   = 8
-request_memory = 20G
+request_memory = 16G
 
 # Execution
 initial_dir    = /home/data/sparse_dense/BIDS/sparseDense/code/sl_submit/
