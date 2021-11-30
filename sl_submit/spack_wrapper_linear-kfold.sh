@@ -5,15 +5,8 @@ echo "activating env"
 echo "checking python version prior to spack load"
 python --version
 
-echo "spack load python being called"
-spack load python@3.8.12
-spack load py-scikit-learn
-spack load py-nilearn
-spack load py-numpy
-spack load py-nibabel
-
 echo "python version after spack load python"
 python --version
 
 echo "calling python script with for sub-$1"
-python searchlight_svm-linear-kfold.py $1
+python3 searchlight_svm-linear-kfold.py $1
